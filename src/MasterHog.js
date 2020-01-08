@@ -14,8 +14,6 @@ export default class MasterHog extends Component {
     });
   };
 
-  
-
   render() {
     return (
       <div>
@@ -47,9 +45,6 @@ export default class MasterHog extends Component {
           <img id="master-blaster" src={Master} alt="" />
         </div>
         <ul className="hoglist">
-          {/* <BabyHog eyeColor={this.state.eyeColor} />
-          <BabyHog eyeColor={this.state.eyeColor} />
-          <BabyHog eyeColor={this.state.eyeColor} /> */}
           {offspring.map(babyHog => (
             <BabyHog
               key={babyHog.id}
