@@ -10,8 +10,16 @@ import GlowingBaby from './assets/glowing-eyes.png'
 
 export default class BabyHog extends Component {
 
-  constructor(props) {
-    super(props)
+  state = {
+    weight: 0.5
+  }
+  displayEyeColor = () => {
+    if (this.props.eyeColor === "blue") 
+      return <img src={BlueBaby} style={{height: '200px'}} alt="MasterBlasterJrJr" />
+    else if (this.props.eyeColor === "sun") 
+      return <img src={SunBaby} style={{height: '200px'}} alt="MasterBlasterJrJr" />
+    else
+      return <img src={GlowingBaby} style={{height: '200px'}} alt="MasterBlasterJrJr" />
   }
 
   changeWeight = (e) => {
@@ -22,23 +30,35 @@ export default class BabyHog extends Component {
     })
   }
 
+  changeWeight = e => {
+    if (e.target.name === "+") {
+      this.setState ({
+        weight: this.state.weight + 0.1
+      })
+    }
+    else this.setState({
+      weight: this.state.weight - 0.1
+    })
+  }
+
   render() {
+    const {name, hobby, id} = this.props.info;
     return (
       <li className="hogbabies">
-        <h1>Name</h1>
-        <h3>Weight:</h3>
-        <h3>Hobby:</h3>
-        <h4>Eye Color:</h4>
+        <h1>Name: {name}</h1>
+        <h3>Weight: {Math.round(this.state.weight*10)/10 } tonnes</h3>
+        <h3>Hobby: {hobby} </h3>
+        <h4>Eye Color: {this.props.eyeColor} </h4>
           
-        <Button name="+">
+        <Button name="+" onClick = {(e) => this.changeWeight(e)}>
           Increase Weight
         </Button>
-        <Button name="-">
+        <Button name="-" onClick = {(e) => this.changeWeight(e)}>
           Decrease Weight
         </Button>
 
         <div className="hb-wrap">
-          <img src={normalBaby} style={{height: '200px'}} alt="MasterBlasterJrJr" />
+          {this.displayEyeColor()}
         </div>
         
       </li>
